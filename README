@@ -1,0 +1,29 @@
+# Coupon System Project
+
+## About
+Dar Gershoni
+darger3@gmail.com
+054-4660999
+
+
+## Login information
+### Admin
+email: admin@admin.com
+password: admin
+### Company
+will be tested as company # 1 - Ivory
+email: info@ivory.com
+password: 1234
+### Customer
+will be tested as customer # 10 - Shiri Gutman
+email : Shiri@gmail.com
+password : 1234
+
+##Web
+Authorization path - http://localhost:8080/api/auth
+
+admin path - http://localhost:8080/api/admin/customers
+
+company path - http://localhost:8080/api/company
+
+customer path - http://localhost:8080/api/customer
