@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 @Entity
 @Table(name = "customers")
 @Data
@@ -34,24 +34,9 @@ public class Customer {
     @JsonIgnore
     private List<Coupon> coupons;
 
-    public void purchaseCoupon(Coupon coupon){
+    public void purchaseCoupon(Coupon coupon) {
         this.coupons.add(coupon);
     }
 
-//    public Coupon getSingleCoupon(int idx) {
-//        return coupons.get(idx);
-//    }
 
-//    @Override
-//    public String toString() {
-//        return "Customer{" +
-//                "id=" + id +
-//                ", firstName='" + firstName + '\'' +
-//                ", lastName='" + lastName + '\'' +
-//                ", email='" + email + '\'' +
-//                ", password='" + password + '\'' +
-//                ", coupons=\n" + (coupons != null ? coupons.stream().map(Coupon::toString).collect(Collectors.joining("\n")) : "") +
-//                '}' + "\n";
-//
-//    }
 }

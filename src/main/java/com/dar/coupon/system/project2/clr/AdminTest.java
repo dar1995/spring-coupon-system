@@ -1,9 +1,6 @@
 package com.dar.coupon.system.project2.clr;
 
 import com.dar.coupon.system.project2.beans.*;
-import com.dar.coupon.system.project2.repositories.CompanyRepository;
-import com.dar.coupon.system.project2.repositories.CouponRepository;
-import com.dar.coupon.system.project2.repositories.CustomerRepository;
 import com.dar.coupon.system.project2.service.AdminService;
 import com.dar.coupon.system.project2.utils.Art;
 import com.dar.coupon.system.project2.utils.Test;

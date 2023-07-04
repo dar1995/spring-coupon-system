@@ -1,7 +1,6 @@
 package com.dar.coupon.system.project2.controllers;
 
 import com.dar.coupon.system.project2.beans.Category;
-import com.dar.coupon.system.project2.beans.Company;
 import com.dar.coupon.system.project2.beans.Coupon;
 import com.dar.coupon.system.project2.beans.Customer;
 import com.dar.coupon.system.project2.exceptions.CouponSystemExceptions;
@@ -25,7 +24,7 @@ public class CustomerController {
 
     @GetMapping
     public CouponToObject getAllCoupons(@RequestHeader(value = "Authorization") UUID token, @PathVariable int customerId) throws CouponSystemExceptions {
-        if (!tokenService.isUserAllowed(token, ClientType.CUSTOMER)){
+        if (!tokenService.isUserAllowed(token, ClientType.CUSTOMER)) {
             throw new CouponSystemExceptions(ErrMsg.NOT_AUTHORIZED);
         }
         return new CouponToObject(customerService.getCustomerCoupons(customerId));
@@ -33,7 +32,7 @@ public class CustomerController {
 
     @GetMapping("{couponId}")
     public Coupon getSingleCoupon(@RequestHeader(value = "Authorization") UUID token, @PathVariable int customerId, @PathVariable int couponId) throws CouponSystemExceptions {
-        if (!tokenService.isUserAllowed(token, ClientType.CUSTOMER)){
+        if (!tokenService.isUserAllowed(token, ClientType.CUSTOMER)) {
             throw new CouponSystemExceptions(ErrMsg.NOT_AUTHORIZED);
         }
         return customerService.getSingle(customerId, couponId);
@@ -41,7 +40,7 @@ public class CustomerController {
 
     @GetMapping("by-category")
     public CouponToObject getCouponsByCategory(@RequestHeader(value = "Authorization") UUID token, @PathVariable int customerId, @RequestParam String val) throws CouponSystemExceptions {
-        if (!tokenService.isUserAllowed(token, ClientType.CUSTOMER)){
+        if (!tokenService.isUserAllowed(token, ClientType.CUSTOMER)) {
             throw new CouponSystemExceptions(ErrMsg.NOT_AUTHORIZED);
         }
         return new CouponToObject(customerService.getCustomerCoupons(customerId, Category.valueOf(val)));
@@ -49,7 +48,7 @@ public class CustomerController {
 
     @GetMapping("by-price")
     public CouponToObject getCouponsByPrice(@RequestHeader(value = "Authorization") UUID token, @PathVariable int customerId, @RequestParam double val) throws CouponSystemExceptions {
-        if (!tokenService.isUserAllowed(token, ClientType.CUSTOMER)){
+        if (!tokenService.isUserAllowed(token, ClientType.CUSTOMER)) {
             throw new CouponSystemExceptions(ErrMsg.NOT_AUTHORIZED);
         }
         return new CouponToObject(customerService.getCustomerCoupons(customerId, val));
@@ -57,7 +56,7 @@ public class CustomerController {
 
     @GetMapping("details")
     public Customer customerDetails(@RequestHeader(value = "Authorization") UUID token, @PathVariable int customerId) throws CouponSystemExceptions {
-        if (!tokenService.isUserAllowed(token, ClientType.CUSTOMER)){
+        if (!tokenService.isUserAllowed(token, ClientType.CUSTOMER)) {
             throw new CouponSystemExceptions(ErrMsg.NOT_AUTHORIZED);
         }
         return customerService.getCustomerDetails(customerId);
@@ -65,7 +64,7 @@ public class CustomerController {
 
     @PostMapping("{couponId}")
     public void purchaseCoupon(@RequestHeader(value = "Authorization") UUID token, @PathVariable int customerId, @PathVariable int couponId) throws CouponSystemExceptions {
-        if (!tokenService.isUserAllowed(token, ClientType.CUSTOMER)){
+        if (!tokenService.isUserAllowed(token, ClientType.CUSTOMER)) {
             throw new CouponSystemExceptions(ErrMsg.NOT_AUTHORIZED);
         }
         customerService.purchaseCoupon(customerId, couponId);

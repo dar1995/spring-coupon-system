@@ -46,31 +46,31 @@ public class CustomerTest implements CommandLineRunner {
         }
         Test.test("Customer Service - purchase coupon - coupon sold out");
         try {
-            customerService.purchaseCoupon(10,4);
+            customerService.purchaseCoupon(10, 4);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         Test.test("Customer Service - purchase coupon - coupon expired");
         try {
-            customerService.purchaseCoupon(10,6);
+            customerService.purchaseCoupon(10, 6);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         Test.test("Customer Service - purchase coupon - success");
-        int amount = 0;
+        int amount;
         amount = couponRepository.findById(7).get().getAmount();
         System.out.println("Coupon 7 amount before purchasing: " + amount);
-        customerService.purchaseCoupon(10,7);
-        customerService.purchaseCoupon(10,5);
+        customerService.purchaseCoupon(10, 7);
+        customerService.purchaseCoupon(10, 5);
         customerService.getCustomerCoupons(10).forEach(System.out::println);
-        amount = customerService.getSingle(10,7).getAmount();
+        amount = customerService.getSingle(10, 7).getAmount();
         System.out.println("Coupon 7 amount after purchasing: " + amount);
         System.out.println("---------------------------------------------------------");
         System.out.println();
         Test.test("Customer Service - get customer coupons by category - no coupons ");
         try {
             System.out.println(customerService.getCustomerCoupons(10, Category.FOOD));
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         Test.test("Customer Service - get customer coupons by category - success ");
@@ -79,21 +79,18 @@ public class CustomerTest implements CommandLineRunner {
         System.out.println();
         Test.test("Customer Service - get customer coupons by price - no coupons ");
         try {
-            System.out.println(customerService.getCustomerCoupons(10,10));
-        }catch (Exception e){
+            System.out.println(customerService.getCustomerCoupons(10, 10));
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
         Test.test("Customer Service - get customer coupons by price - success ");
-        customerService.getCustomerCoupons(10,100).forEach(System.out::println);
+        customerService.getCustomerCoupons(10, 100).forEach(System.out::println);
         System.out.println("---------------------------------------------------------");
         System.out.println();
         Test.test("Customer Service - get customer details - success ");
         System.out.println(customerService.getCustomerDetails(10));
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-
-
-
 
 
     }

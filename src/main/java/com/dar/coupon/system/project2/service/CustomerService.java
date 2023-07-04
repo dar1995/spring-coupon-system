@@ -12,12 +12,13 @@ public interface CustomerService {
 
     List<Coupon> getCustomerCoupons(int customerId) throws CouponSystemExceptions;
 
-    List<Coupon> getCustomerCoupons(int customerId,Category category) throws CouponSystemExceptions;
+    List<Coupon> getCustomerCoupons(int customerId, Category category) throws CouponSystemExceptions;
 
-    List<Coupon> getCustomerCoupons(int customerId,double maxPrice) throws CouponSystemExceptions;
+    List<Coupon> getCustomerCoupons(int customerId, double maxPrice) throws CouponSystemExceptions;
 
-    Coupon getSingle(int customerId,int couponId) throws CouponSystemExceptions;
+    Coupon getSingle(int customerId, int couponId) throws CouponSystemExceptions;
 
     Customer getCustomerDetails(int customerId) throws CouponSystemExceptions;
+
     void register(Customer customer) throws CouponSystemExceptions;
 }

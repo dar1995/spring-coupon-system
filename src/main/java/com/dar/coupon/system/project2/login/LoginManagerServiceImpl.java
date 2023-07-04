@@ -12,8 +12,9 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
 @Service
-public class LoginManagerServiceImpl implements LoginManagerService{
+public class LoginManagerServiceImpl implements LoginManagerService {
     @Autowired
     CompanyService companyService;
     @Autowired
@@ -24,26 +25,26 @@ public class LoginManagerServiceImpl implements LoginManagerService{
     ClientService clientService;
     @Autowired
     TokenService tokenService;
+
     @Override
-    public void register(User user,ClientType clientType) throws CouponSystemExceptions {
-        switch (clientType){
-            case ADMIN :
-                throw new CouponSystemExceptions(ErrMsg.REGISTER_AS_ADMIN);
-            case COMPANY:
+    public void register(User user, ClientType clientType) throws CouponSystemExceptions {
+        switch (clientType) {
+            case ADMIN -> throw new CouponSystemExceptions(ErrMsg.REGISTER_AS_ADMIN);
+            case COMPANY -> {
                 Company company = Company.builder()
                         .name(user.getCompanyName())
                         .email(user.getEmail())
                         .password(user.getPassword()).build();
                 companyService.register(company);
-                break;
-            case CUSTOMER:
+            }
+            case CUSTOMER -> {
                 Customer customer = Customer.builder()
                         .firstName(user.getFirstName())
                         .lastName(user.getLastName())
                         .email(user.getEmail())
                         .password(user.getPassword()).build();
                 customerService.register(customer);
-                break;
+            }
         }
 
     }
@@ -53,19 +54,13 @@ public class LoginManagerServiceImpl implements LoginManagerService{
         int id;
         UUID token;
         Map<UUID, Integer> map = new HashMap<>();
-        switch (clientType){
-            case ADMIN :
-                clientService =(ClientService) adminService;
-                break;
-            case CUSTOMER:
-                clientService = (ClientService) customerService;
-                break;
-            case COMPANY:
-                clientService = (ClientService) companyService;
-                break;
+        switch (clientType) {
+            case ADMIN -> clientService = (ClientService) adminService;
+            case CUSTOMER -> clientService = (ClientService) customerService;
+            case COMPANY -> clientService = (ClientService) companyService;
         }
-        id= clientService.login(email, password);
-        if (id == 0){
+        id = clientService.login(email, password);
+        if (id == 0) {
             throw new CouponSystemExceptions(ErrMsg.LOGIN_WRONG_LOGIN_DETAILS);
         }
         User user = User.builder()

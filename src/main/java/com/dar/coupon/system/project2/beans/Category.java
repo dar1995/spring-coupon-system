@@ -7,11 +7,4 @@ public enum Category {
     ELECTRONICS,
     VACATION
 
-//    public int dbIdx() {
-//        return this.ordinal() + 1;
-//    }
-//
-//    public static Category byDBId(int dbId) {
-//        return Category.values()[dbId - 1];
-//    }
 }

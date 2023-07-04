@@ -6,10 +6,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CouponToObject{
+public class CouponToObject {
     private List<Coupon> coupons;
 
 }

@@ -10,6 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CompanyToList {
+public class CompanyToObject {
     private List<Company> companies;
 }

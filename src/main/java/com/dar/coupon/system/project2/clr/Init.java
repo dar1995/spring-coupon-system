@@ -14,7 +14,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import javax.management.loading.ClassLoaderRepository;
+
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
@@ -30,6 +30,7 @@ public class Init implements CommandLineRunner {
     CustomerRepository customerRepository;
     @Autowired
     CouponRepository couponRepository;
+
     @Override
     public void run(String... args) throws Exception {
         System.out.println("11111111111111111111111111111111111111111");
@@ -259,13 +260,11 @@ public class Init implements CommandLineRunner {
         company10.setCoupons(List.of(coupon7));
         List<Company> companies = List.of(company1, company2, company3, company4, company5, company6,
                 company7, company8, company9, company10);
-//        List<Coupon> coupons = List.of(coupon1, coupon2, coupon3, coupon4, coupon5, coupon6, coupon7);
         List<Customer> customers = List.of(customer1, customer2, customer3, customer4, customer5,
                 customer6, customer7, customer8, customer9, customer10);
         System.out.println("22222222222222222222222222222222222222222222222222");
         companyRepository.saveAll(companies);
         System.out.println("333333333333333333333333333333333333333333333333333333333");
-        //couponRepository.saveAll(List.of(coupon1, coupon2, coupon3, coupon4, coupon5, coupon6, coupon7));
         customerRepository.saveAll(customers);
         System.out.println("444444444444444444444444444444444444444444444444444444444444444444444");
         System.out.println(Art.COMPANIES);
@@ -275,15 +274,6 @@ public class Init implements CommandLineRunner {
         System.out.println(Art.CUSTOMERS);
         customerRepository.findAll().forEach(System.out::println);
 
-        //couponRepository.purchaseCoupon(1, 4);
-//        couponRepository.purchaseCoupon(1, 3);
-//        couponRepository.purchaseCoupon(2, 2);
-//        couponRepository.purchaseCoupon(4, 5);
-//        couponRepository.purchaseCoupon(3, 6);
-//        couponRepository.purchaseCoupon(5, 1);
-//        couponRepository.purchaseCoupon(10, 2);
-//        couponRepository.purchaseCoupon(4, 4);
-//        couponRepository.purchaseCoupon(10, 3);
 
     }
 

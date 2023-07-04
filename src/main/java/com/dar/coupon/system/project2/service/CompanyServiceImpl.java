@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class CompanyServiceImpl extends ClientService implements CompanyService{
+public class CompanyServiceImpl extends ClientService implements CompanyService {
 
     @Override
     public void addCoupon(int companyId, Coupon coupon) throws CouponSystemExceptions {
@@ -46,7 +46,7 @@ public class CompanyServiceImpl extends ClientService implements CompanyService{
         if (couponID != id) {
             throw new CouponSystemExceptions(ErrMsg.COUPON_UPDATE_CANNOT_UPDATE_COUPON_ID);
         }
-        if (coupon.getCompany()!= null && coupon.getCompany().getId() != companyId) {
+        if (coupon.getCompany() != null && coupon.getCompany().getId() != companyId) {
             throw new CouponSystemExceptions(ErrMsg.COUPON_UPDATE__COMPANY_ID_INVALID);
         }
         coupon.setId(couponID);
@@ -68,7 +68,7 @@ public class CompanyServiceImpl extends ClientService implements CompanyService{
     public Coupon getSingle(int companyId, int couponId) throws CouponSystemExceptions {
         Company company = companyRepository.findById(companyId).get();
         Coupon coupon = couponRepository.findByIdAndCompany(couponId, company);
-        if (coupon == null){
+        if (coupon == null) {
             throw new CouponSystemExceptions(ErrMsg.COUPON_NOT_EXIST);
         }
         return coupon;
@@ -78,7 +78,7 @@ public class CompanyServiceImpl extends ClientService implements CompanyService{
     public List<Coupon> getCompanyCoupons(int companyId) throws CouponSystemExceptions {
         Company company = companyRepository.findById(companyId).get();
         List<Coupon> coupons = couponRepository.findByCompany(company);
-        if (coupons.isEmpty()){
+        if (coupons.isEmpty()) {
             throw new CouponSystemExceptions(ErrMsg.NO_COUPONS);
         }
         return coupons;
@@ -88,7 +88,7 @@ public class CompanyServiceImpl extends ClientService implements CompanyService{
     public List<Coupon> getCompanyCoupons(int companyId, Category category) throws CouponSystemExceptions {
         Company company = companyRepository.findById(companyId).orElseThrow(() -> new CouponSystemExceptions(ErrMsg.COMPANY_NOT_EXIST));
         List<Coupon> coupons = couponRepository.findByCompanyAndCategory(company, category);
-        if (coupons.isEmpty()){
+        if (coupons.isEmpty()) {
             throw new CouponSystemExceptions(ErrMsg.NO_COUPONS_BY_CATEGORY);
         }
         return coupons;
@@ -98,7 +98,7 @@ public class CompanyServiceImpl extends ClientService implements CompanyService{
     public List<Coupon> getCompanyCoupons(int companyId, double maxPrice) throws CouponSystemExceptions {
         Company company = companyRepository.findById(companyId).orElseThrow(() -> new CouponSystemExceptions(ErrMsg.COMPANY_NOT_EXIST));
         List<Coupon> coupons = couponRepository.findByCompanyAndPriceLessThan(company, maxPrice);
-        if (coupons.isEmpty()){
+        if (coupons.isEmpty()) {
             throw new CouponSystemExceptions(ErrMsg.NO_COUPONS_BY_PRICE);
         }
         return coupons;
@@ -131,7 +131,7 @@ public class CompanyServiceImpl extends ClientService implements CompanyService{
     }
 
     @Override
-    public int login(String email, String password){
+    public int login(String email, String password) {
 
         return companyRepository.findIdByEmailAndPassword(email, password);
     }

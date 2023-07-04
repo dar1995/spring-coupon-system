@@ -25,7 +25,7 @@ public class CompanyController {
 
     @GetMapping
     public CouponToObject getAllCoupons(@RequestHeader(value = "Authorization") UUID token, @PathVariable int companyId) throws CouponSystemExceptions {
-        if (!tokenService.isUserAllowed(token, ClientType.COMPANY)){
+        if (!tokenService.isUserAllowed(token, ClientType.COMPANY)) {
             throw new CouponSystemExceptions(ErrMsg.NOT_AUTHORIZED);
         }
         return new CouponToObject(companyService.getCompanyCoupons(companyId));
@@ -33,7 +33,7 @@ public class CompanyController {
 
     @GetMapping("{couponId}")
     public Coupon getSingleCoupon(@RequestHeader(value = "Authorization") UUID token, @PathVariable int companyId, @PathVariable int couponId) throws CouponSystemExceptions {
-        if (!tokenService.isUserAllowed(token, ClientType.COMPANY)){
+        if (!tokenService.isUserAllowed(token, ClientType.COMPANY)) {
             throw new CouponSystemExceptions(ErrMsg.NOT_AUTHORIZED);
         }
         return companyService.getSingle(companyId, couponId);
@@ -41,7 +41,7 @@ public class CompanyController {
 
     @GetMapping("by-category")
     public CouponToObject getCouponsByCategory(@RequestHeader(value = "Authorization") UUID token, @PathVariable int companyId, @RequestParam String val) throws CouponSystemExceptions {
-        if (!tokenService.isUserAllowed(token, ClientType.COMPANY)){
+        if (!tokenService.isUserAllowed(token, ClientType.COMPANY)) {
             throw new CouponSystemExceptions(ErrMsg.NOT_AUTHORIZED);
         }
         return new CouponToObject(companyService.getCompanyCoupons(companyId, Category.valueOf(val)));
@@ -49,7 +49,7 @@ public class CompanyController {
 
     @GetMapping("by-price")
     public CouponToObject getCouponsByPrice(@RequestHeader(value = "Authorization") UUID token, @PathVariable int companyId, @RequestParam double val) throws CouponSystemExceptions {
-        if (!tokenService.isUserAllowed(token, ClientType.COMPANY)){
+        if (!tokenService.isUserAllowed(token, ClientType.COMPANY)) {
             throw new CouponSystemExceptions(ErrMsg.NOT_AUTHORIZED);
         }
         return new CouponToObject(companyService.getCompanyCoupons(companyId, val));
@@ -57,7 +57,7 @@ public class CompanyController {
 
     @GetMapping("details")
     public Company companyDetails(@RequestHeader(value = "Authorization") UUID token, @PathVariable int companyId) throws CouponSystemExceptions {
-        if (!tokenService.isUserAllowed(token, ClientType.COMPANY)){
+        if (!tokenService.isUserAllowed(token, ClientType.COMPANY)) {
             throw new CouponSystemExceptions(ErrMsg.NOT_AUTHORIZED);
         }
         return companyService.getCompanyDetails(companyId);
@@ -66,7 +66,7 @@ public class CompanyController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void addCoupon(@RequestHeader(value = "Authorization") UUID token, @PathVariable int companyId, @RequestBody Coupon coupon) throws CouponSystemExceptions {
-        if (!tokenService.isUserAllowed(token, ClientType.COMPANY)){
+        if (!tokenService.isUserAllowed(token, ClientType.COMPANY)) {
             throw new CouponSystemExceptions(ErrMsg.NOT_AUTHORIZED);
         }
         companyService.addCoupon(companyId, coupon);
@@ -74,8 +74,8 @@ public class CompanyController {
 
     @PutMapping("/{couponId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateCoupon(@RequestHeader(value = "Authorization") UUID token, @PathVariable int companyId, @PathVariable int couponId,@RequestBody Coupon coupon ) throws CouponSystemExceptions {
-        if (!tokenService.isUserAllowed(token, ClientType.COMPANY)){
+    public void updateCoupon(@RequestHeader(value = "Authorization") UUID token, @PathVariable int companyId, @PathVariable int couponId, @RequestBody Coupon coupon) throws CouponSystemExceptions {
+        if (!tokenService.isUserAllowed(token, ClientType.COMPANY)) {
             throw new CouponSystemExceptions(ErrMsg.NOT_AUTHORIZED);
         }
         companyService.updateCoupon(companyId, couponId, coupon);
@@ -84,7 +84,7 @@ public class CompanyController {
     @DeleteMapping("/{couponId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCoupon(@RequestHeader(value = "Authorization") UUID token, @PathVariable int companyId, @PathVariable int couponId) throws CouponSystemExceptions {
-        if (!tokenService.isUserAllowed(token, ClientType.COMPANY)){
+        if (!tokenService.isUserAllowed(token, ClientType.COMPANY)) {
             throw new CouponSystemExceptions(ErrMsg.NOT_AUTHORIZED);
         }
         companyService.deleteCoupon(companyId, couponId);

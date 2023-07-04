@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class SystemControllerAdvice {
     @ExceptionHandler(value = CouponSystemExceptions.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrDetails handleException(Exception e){
+    public ErrDetails handleException(Exception e) {
         return new ErrDetails(e.getMessage());
     }
 }

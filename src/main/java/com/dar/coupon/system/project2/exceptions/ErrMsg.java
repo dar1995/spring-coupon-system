@@ -38,7 +38,6 @@ public enum ErrMsg {
     LOGIN_WRONG_LOGIN_DETAILS("Wrong email or password"),
     NOT_AUTHORIZED("Access Denied: You are not authorized to access this page or perform this action."),
     SESSION_EXPIRED("your session expired, please log-in again");
-//    LOGIN_INVALID_CLIENT_TYPE("Invalid client type");
     private String message;
 
     ErrMsg(String message) {

@@ -16,15 +16,16 @@ import java.util.UUID;
 public class AuthController {
     @Autowired
     LoginManagerService loginManagerService;
+
     @PostMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void register(@RequestBody User user , @RequestParam String val) throws CouponSystemExceptions {
+    public void register(@RequestBody User user, @RequestParam String val) throws CouponSystemExceptions {
         loginManagerService.register(user, ClientType.valueOf(val));
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Map<UUID, Integer> login(@RequestParam String email, @RequestParam String password,@RequestParam ClientType clientType) throws CouponSystemExceptions {
+    public Map<UUID, Integer> login(@RequestParam String email, @RequestParam String password, @RequestParam ClientType clientType) throws CouponSystemExceptions {
         return loginManagerService.login(email, password, clientType);
     }
 

@@ -17,11 +17,11 @@ public class AdminServiceImpl extends ClientService implements AdminService {
             throw new CouponSystemExceptions(ErrMsg.COMPANY_ADD_INVALID_ID);
         }
         String name = company.getName();
-        if (companyRepository.existsByName(name)){
+        if (companyRepository.existsByName(name)) {
             throw new CouponSystemExceptions(ErrMsg.COMPANY_ADD_NAME_EXIST);
         }
         String email = company.getEmail();
-        if (companyRepository.existsByEmail(email)){
+        if (companyRepository.existsByEmail(email)) {
             throw new CouponSystemExceptions(ErrMsg.COMPANY_ADD_EMAIL_EXIST);
         }
         companyRepository.save(company);
@@ -108,7 +108,7 @@ public class AdminServiceImpl extends ClientService implements AdminService {
 
     @Override
     public int login(String email, String password) {
-        if (email.equals("admin@admin.com") && password.equals("admin")){
+        if (email.equals("admin@admin.com") && password.equals("admin")) {
             return -999;
         }
         return 0;

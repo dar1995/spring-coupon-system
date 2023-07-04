@@ -4,7 +4,6 @@ import com.dar.coupon.system.project2.beans.Category;
 import com.dar.coupon.system.project2.beans.Company;
 import com.dar.coupon.system.project2.beans.Coupon;
 import com.dar.coupon.system.project2.repositories.CompanyRepository;
-import com.dar.coupon.system.project2.repositories.CouponRepository;
 import com.dar.coupon.system.project2.service.CompanyService;
 import com.dar.coupon.system.project2.utils.Art;
 import com.dar.coupon.system.project2.utils.Test;
@@ -26,6 +25,7 @@ public class CompanyTest implements CommandLineRunner {
     CompanyRepository companyRepository;
 
     Company companyForCheck;
+
     @Override
     public void run(String... args) throws Exception {
         System.out.println(Art.COMPANY_SERVICE_TEST);
@@ -145,7 +145,7 @@ public class CompanyTest implements CommandLineRunner {
         Test.test("Company Service - get all coupon by category - no coupons found ");
         try {
             System.out.println(companyService.getCompanyCoupons(1, Category.FOOD));
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -156,7 +156,7 @@ public class CompanyTest implements CommandLineRunner {
         Test.test("Company Service - get all coupon by max price - no coupons found ");
         try {
             System.out.println(companyService.getCompanyCoupons(1, 50));
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
