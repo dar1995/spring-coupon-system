@@ -1,6 +1,6 @@
 package com.dar.coupon.system.project2.beans;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,7 +31,6 @@ public class Customer {
     private String password;
     @ManyToMany
     @ToString.Exclude
-    @JsonIgnore
     private List<Coupon> coupons;
 
     public void purchaseCoupon(Coupon coupon) {

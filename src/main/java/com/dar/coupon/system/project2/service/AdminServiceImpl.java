@@ -4,6 +4,7 @@ import com.dar.coupon.system.project2.beans.Company;
 import com.dar.coupon.system.project2.beans.Customer;
 import com.dar.coupon.system.project2.exceptions.CouponSystemExceptions;
 import com.dar.coupon.system.project2.exceptions.ErrMsg;
+import com.dar.coupon.system.project2.models.NameAndId;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 @Service
 public class AdminServiceImpl extends ClientService implements AdminService {
     @Override
-    public void addCompany(Company company) throws CouponSystemExceptions {
+    public Company addCompany(Company company) throws CouponSystemExceptions {
         int id = company.getId();
         if (id != 0) {
             throw new CouponSystemExceptions(ErrMsg.COMPANY_ADD_INVALID_ID);
@@ -25,10 +26,11 @@ public class AdminServiceImpl extends ClientService implements AdminService {
             throw new CouponSystemExceptions(ErrMsg.COMPANY_ADD_EMAIL_EXIST);
         }
         companyRepository.save(company);
+        return companyRepository.findByEmailAndPassword(company.getEmail(), company.getPassword());
     }
 
     @Override
-    public void updateCompany(int companyID, Company company) throws CouponSystemExceptions {
+    public Company updateCompany(int companyID, Company company) throws CouponSystemExceptions {
         Company companyToUpdate = companyRepository.findById(companyID).orElseThrow(() -> new CouponSystemExceptions(ErrMsg.COMPANY_NOT_EXIST));
         if (companyID != company.getId()) {
             throw new CouponSystemExceptions(ErrMsg.COMPANY_UPDATE_CANNOT_UPDATE_ID);
@@ -39,6 +41,7 @@ public class AdminServiceImpl extends ClientService implements AdminService {
         }
         company.setId(companyID);
         companyRepository.saveAndFlush(company);
+        return companyRepository.findById(companyID).orElseThrow(()-> new CouponSystemExceptions(ErrMsg.COMPANY_NOT_EXIST));
 
     }
 
@@ -63,7 +66,7 @@ public class AdminServiceImpl extends ClientService implements AdminService {
     }
 
     @Override
-    public void addCustomer(Customer customer) throws CouponSystemExceptions {
+    public Customer addCustomer(Customer customer) throws CouponSystemExceptions {
         int id = customer.getId();
         if (id != 0) {
             throw new CouponSystemExceptions(ErrMsg.CUSTOMER_ADD_INVALID_ID);
@@ -73,10 +76,11 @@ public class AdminServiceImpl extends ClientService implements AdminService {
             throw new CouponSystemExceptions(ErrMsg.CUSTOMER_ADD_EMAIL_EXIST);
         }
         this.customerRepository.save(customer);
+        return customerRepository.findByEmailAndPassword(customer.getEmail(), customer.getPassword());
     }
 
     @Override
-    public void updateCustomer(int customerID, Customer customer) throws CouponSystemExceptions {
+    public Customer updateCustomer(int customerID, Customer customer) throws CouponSystemExceptions {
         if (!this.customerRepository.existsById(customerID)) {
             throw new CouponSystemExceptions(ErrMsg.CUSTOMER_NOT_EXIST);
         }
@@ -85,6 +89,7 @@ public class AdminServiceImpl extends ClientService implements AdminService {
         }
         customer.setId(customerID);
         this.customerRepository.saveAndFlush(customer);
+        return customerRepository.findById(customerID).orElseThrow(()->new CouponSystemExceptions(ErrMsg.COUPON_NOT_EXIST));
     }
 
     @Override
@@ -107,10 +112,10 @@ public class AdminServiceImpl extends ClientService implements AdminService {
     }
 
     @Override
-    public int login(String email, String password) {
+    public NameAndId login(String email, String password) {
         if (email.equals("admin@admin.com") && password.equals("admin")) {
-            return -999;
+            return new NameAndId(-999, "Boss");
         }
-        return 0;
+        return null;
     }
 }

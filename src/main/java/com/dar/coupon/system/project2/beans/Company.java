@@ -1,6 +1,6 @@
 package com.dar.coupon.system.project2.beans;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,7 +28,6 @@ public class Company {
     private String password;
     @OneToMany(mappedBy = "company", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @ToString.Exclude
-    @JsonIgnore
     private List<Coupon> coupons;
 
     public void setCoupons(List<Coupon> coupons) {

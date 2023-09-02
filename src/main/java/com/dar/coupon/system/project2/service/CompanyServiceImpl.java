@@ -5,6 +5,7 @@ import com.dar.coupon.system.project2.beans.Company;
 import com.dar.coupon.system.project2.beans.Coupon;
 import com.dar.coupon.system.project2.exceptions.CouponSystemExceptions;
 import com.dar.coupon.system.project2.exceptions.ErrMsg;
+import com.dar.coupon.system.project2.models.NameAndId;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -15,7 +16,7 @@ import java.util.List;
 public class CompanyServiceImpl extends ClientService implements CompanyService {
 
     @Override
-    public void addCoupon(int companyId, Coupon coupon) throws CouponSystemExceptions {
+    public Coupon addCoupon(int companyId, Coupon coupon) throws CouponSystemExceptions {
         Company company = companyRepository.findById(companyId).orElseThrow(() -> new CouponSystemExceptions(ErrMsg.COMPANY_NOT_EXIST));
         if (this.couponRepository.existsByTitleAndCompany(coupon.getTitle(), company)) {
             throw new CouponSystemExceptions(ErrMsg.COUPON_ADD_TITLE_EXIST);
@@ -32,12 +33,12 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
         }
         coupon.setCompany(company);
         couponRepository.save(coupon);
-
+        return couponRepository.findByTitleAndCompany(coupon.getTitle(), company);
 
     }
 
     @Override
-    public void updateCoupon(int companyId, int couponID, Coupon coupon) throws CouponSystemExceptions {
+    public Coupon updateCoupon(int companyId, int couponID, Coupon coupon) throws CouponSystemExceptions {
         int id = coupon.getId();
         Company company = companyRepository.findById(companyId).orElseThrow(() -> new CouponSystemExceptions(ErrMsg.COMPANY_NOT_EXIST));
         if (!couponRepository.existsByIdAndCompany(couponID, company)) {
@@ -52,6 +53,7 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
         coupon.setId(couponID);
         coupon.setCompany(company);
         couponRepository.saveAndFlush(coupon);
+        return couponRepository.findById(couponID).orElseThrow(()-> new CouponSystemExceptions(ErrMsg.COUPON_NOT_EXIST));
     }
 
     @Override
@@ -118,10 +120,10 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
             throw new CouponSystemExceptions(ErrMsg.COMPANY_ADD_INVALID_ID);
         }
         if (companyRepository.existsByEmail(company.getEmail())) {
-            throw new CouponSystemExceptions(ErrMsg.COMPANY_ADD_EMAIL_EXIST);
+            throw new CouponSystemExceptions(ErrMsg.REGISTER_EMAIL_EXIST);
         }
         if (companyRepository.existsByName(name)) {
-            throw new CouponSystemExceptions(ErrMsg.COMPANY_ADD_NAME_EXIST);
+            throw new CouponSystemExceptions(ErrMsg.REGISTER_NAME_EXIST);
         }
         if (name == null || name.isBlank() ||
                 email == null || email.isBlank() || password == null || password.isBlank()) {
@@ -131,8 +133,8 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
     }
 
     @Override
-    public int login(String email, String password) {
+    public NameAndId login(String email, String password) {
 
-        return companyRepository.findIdByEmailAndPassword(email, password);
+        return nameAndIdRepository.findCompanyNameAndIdByEmailAndPassword(email, password);
     }
 }

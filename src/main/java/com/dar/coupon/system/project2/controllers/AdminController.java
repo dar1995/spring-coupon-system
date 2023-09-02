@@ -5,8 +5,6 @@ import com.dar.coupon.system.project2.beans.Customer;
 import com.dar.coupon.system.project2.exceptions.CouponSystemExceptions;
 import com.dar.coupon.system.project2.exceptions.ErrMsg;
 import com.dar.coupon.system.project2.login.ClientType;
-import com.dar.coupon.system.project2.models.CompanyToObject;
-import com.dar.coupon.system.project2.models.CustomerToObject;
 import com.dar.coupon.system.project2.security.TokenService;
 import com.dar.coupon.system.project2.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,18 +15,19 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("api/admin")
+@CrossOrigin
 public class AdminController {
     @Autowired
-    AdminService adminService;
+   private AdminService adminService;
     @Autowired
-    TokenService tokenService;
+    private TokenService tokenService;
 
     @GetMapping("companies")
-    public CompanyToObject getAllCompanies(@RequestHeader(value = "Authorization") UUID token) throws CouponSystemExceptions {
+    public Company[] getAllCompanies(@RequestHeader(value = "Authorization") UUID token) throws CouponSystemExceptions {
         if (!tokenService.isUserAllowed(token, ClientType.ADMIN)) {
             throw new CouponSystemExceptions(ErrMsg.NOT_AUTHORIZED);
         }
-        return new CompanyToObject(adminService.getAllCompanies());
+        return adminService.getAllCompanies().toArray(new Company[0]);
     }
 
     @GetMapping("companies/{companyId}")
@@ -40,11 +39,11 @@ public class AdminController {
     }
 
     @GetMapping("customers")
-    public CustomerToObject getAllCustomers(@RequestHeader(value = "Authorization") UUID token) throws CouponSystemExceptions {
+    public Customer[] getAllCustomers(@RequestHeader(value = "Authorization") UUID token) throws CouponSystemExceptions {
         if (!tokenService.isUserAllowed(token, ClientType.ADMIN)) {
             throw new CouponSystemExceptions(ErrMsg.NOT_AUTHORIZED);
         }
-        return new CustomerToObject(adminService.getAllCustomers());
+        return adminService.getAllCustomers().toArray(new Customer[0]);
     }
 
 
@@ -58,38 +57,36 @@ public class AdminController {
 
     @PostMapping("companies")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addCompany(@RequestHeader(value = "Authorization") UUID token, @RequestBody Company company) throws CouponSystemExceptions {
+    public Company addCompany(@RequestHeader(value = "Authorization") UUID token, @RequestBody Company company) throws CouponSystemExceptions {
         if (!tokenService.isUserAllowed(token, ClientType.ADMIN)) {
             throw new CouponSystemExceptions(ErrMsg.NOT_AUTHORIZED);
         }
-        adminService.addCompany(company);
+        return adminService.addCompany(company);
     }
 
     @PostMapping("customers")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addCustomer(@RequestHeader(value = "Authorization") UUID token, @RequestBody Customer customer) throws CouponSystemExceptions {
+    public Customer addCustomer(@RequestHeader(value = "Authorization") UUID token, @RequestBody Customer customer) throws CouponSystemExceptions {
         if (!tokenService.isUserAllowed(token, ClientType.ADMIN)) {
             throw new CouponSystemExceptions(ErrMsg.NOT_AUTHORIZED);
         }
-        adminService.addCustomer(customer);
+        return adminService.addCustomer(customer);
     }
 
     @PutMapping("companies/{companyId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateCompany(@RequestHeader(value = "Authorization") UUID token, @PathVariable int companyId, @RequestBody Company company) throws CouponSystemExceptions {
+    public Company updateCompany(@RequestHeader(value = "Authorization") UUID token, @PathVariable int companyId, @RequestBody Company company) throws CouponSystemExceptions {
         if (!tokenService.isUserAllowed(token, ClientType.ADMIN)) {
             throw new CouponSystemExceptions(ErrMsg.NOT_AUTHORIZED);
         }
-        adminService.updateCompany(companyId, company);
+        return adminService.updateCompany(companyId, company);
     }
 
     @PutMapping("customers/{customerId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateCustomer(@RequestHeader(value = "Authorization") UUID token, @PathVariable int customerId, @RequestBody Customer customer) throws CouponSystemExceptions {
+    public Customer updateCustomer(@RequestHeader(value = "Authorization") UUID token, @PathVariable int customerId, @RequestBody Customer customer) throws CouponSystemExceptions {
         if (!tokenService.isUserAllowed(token, ClientType.ADMIN)) {
             throw new CouponSystemExceptions(ErrMsg.NOT_AUTHORIZED);
         }
-        adminService.updateCustomer(customerId, customer);
+        return adminService.updateCustomer(customerId, customer);
     }
 
     @DeleteMapping("companies/{companyId}")

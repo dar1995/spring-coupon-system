@@ -8,7 +8,7 @@ import com.dar.coupon.system.project2.exceptions.CouponSystemExceptions;
 import java.util.List;
 
 public interface CustomerService {
-    void purchaseCoupon(int customerId, int couponID) throws CouponSystemExceptions;
+    Coupon purchaseCoupon(int customerId, int couponID) throws CouponSystemExceptions;
 
     List<Coupon> getCustomerCoupons(int customerId) throws CouponSystemExceptions;
 

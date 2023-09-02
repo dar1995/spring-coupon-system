@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DailyRemoval {
     @Autowired
-    CouponRepository couponRepository;
+   private CouponRepository couponRepository;
 
     @Scheduled(initialDelay = 1000 * 20, fixedRate = 1000 * 60 * 60)
     public void remove() {

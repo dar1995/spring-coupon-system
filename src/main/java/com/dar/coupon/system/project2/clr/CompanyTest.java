@@ -19,12 +19,12 @@ import java.time.LocalDate;
 @Order(3)
 public class CompanyTest implements CommandLineRunner {
     @Autowired
-    CompanyService companyService;
+  private CompanyService companyService;
 
     @Autowired
-    CompanyRepository companyRepository;
+    private CompanyRepository companyRepository;
 
-    Company companyForCheck;
+    private Company companyForCheck;
 
     @Override
     public void run(String... args) throws Exception {

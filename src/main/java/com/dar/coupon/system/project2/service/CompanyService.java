@@ -8,9 +8,9 @@ import com.dar.coupon.system.project2.exceptions.CouponSystemExceptions;
 import java.util.List;
 
 public interface CompanyService {
-    void addCoupon(int companyId, Coupon coupon) throws CouponSystemExceptions;
+    Coupon addCoupon(int companyId, Coupon coupon) throws CouponSystemExceptions;
 
-    void updateCoupon(int companyId, int couponID, Coupon coupon) throws CouponSystemExceptions;
+    Coupon updateCoupon(int companyId, int couponID, Coupon coupon) throws CouponSystemExceptions;
 
     void deleteCoupon(int companyId, int couponID) throws CouponSystemExceptions;
 

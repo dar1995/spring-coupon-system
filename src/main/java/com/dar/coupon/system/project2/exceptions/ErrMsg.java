@@ -35,10 +35,12 @@ public enum ErrMsg {
     NO_COUPONS("You have no coupons..."),
     INVALID_DETAILS("You most fill all required fields"),
     REGISTER_AS_ADMIN("Cannot register as admin"),
+    REGISTER_NAME_EXIST("Oops, looks like your company name is already in use"),
+    REGISTER_EMAIL_EXIST("Email address already in use"),
     LOGIN_WRONG_LOGIN_DETAILS("Wrong email or password"),
     NOT_AUTHORIZED("Access Denied: You are not authorized to access this page or perform this action."),
     SESSION_EXPIRED("your session expired, please log-in again");
-    private String message;
+    private final String message;
 
     ErrMsg(String message) {
         this.message = message;

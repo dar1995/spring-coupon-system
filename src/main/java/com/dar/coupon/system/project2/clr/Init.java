@@ -25,15 +25,14 @@ public class Init implements CommandLineRunner {
 
 
     @Autowired
-    CompanyRepository companyRepository;
+   private CompanyRepository companyRepository;
     @Autowired
-    CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
     @Autowired
-    CouponRepository couponRepository;
+    private CouponRepository couponRepository;
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("11111111111111111111111111111111111111111");
         Company company1 = Company.builder()
                 .name("IVORY")
                 .email("info@ivory.com")
@@ -102,7 +101,7 @@ public class Init implements CommandLineRunner {
                 .endDate(Date.valueOf(LocalDate.now().plusWeeks(1)))
                 .amount(150)
                 .price(130)
-                .image("https://media2.giphy.com/media/tlfo23OlW2vra/200.webp?cid=ecf05e47fmiefai82pffy7i8roqx4012mygdzjfe8p6wus9z&ep=v1_gifs_search&rid=200.webp&ct=g")
+                .image("https://as1.ftcdn.net/v2/jpg/02/29/74/20/1000_F_229742070_UOUlBZtOdQBzYDaPhDyH9hbpftbK9inT.jpg")
                 .build();
 
         Coupon coupon2 = Coupon.builder()
@@ -114,7 +113,7 @@ public class Init implements CommandLineRunner {
                 .endDate(Date.valueOf(LocalDate.now().plusWeeks(4)))
                 .amount(300)
                 .price(30)
-                .image("https://media1.giphy.com/media/FHlMJHSx5sGBi/200w.webp?cid=ecf05e47vr67goq4d4y0cqe9jnr5m940d7y9luty5hamjz30&ep=v1_gifs_search&rid=200w.webp&ct=g")
+                .image("https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/sol/sol03220/y/37.jpg")
                 .build();
 
         Coupon coupon3 = Coupon.builder()
@@ -126,7 +125,7 @@ public class Init implements CommandLineRunner {
                 .endDate(Date.valueOf(LocalDate.now().plusWeeks(2)))
                 .amount(0)
                 .price(55)
-                .image("https://media3.giphy.com/media/DYerUxZa9k568/200w.webp?cid=ecf05e47e54ukm55gamivf6g87xxwz12fd9nbsmosx66v8cj&ep=v1_gifs_search&rid=200w.webp&ct=g")
+                .image("https://as1.ftcdn.net/v2/jpg/03/68/44/40/1000_F_368444058_TiFuWznROsYSNO8v5s1MZOSirsFJPhni.jpg")
                 .build();
 
         Coupon coupon4 = Coupon.builder()
@@ -138,7 +137,7 @@ public class Init implements CommandLineRunner {
                 .endDate(Date.valueOf(LocalDate.now().minusWeeks(1)))
                 .amount(250)
                 .price(1500)
-                .image("https://media1.giphy.com/media/KnBoMGan2y4unVn7Us/giphy.webp?cid=ecf05e47n49y2sh86an19tvx5k82l4zxwx71z1avixx25j2i&ep=v1_gifs_search&rid=giphy.webp&ct=g")
+                .image("https://t4.ftcdn.net/jpg/01/70/66/75/240_F_170667573_7EnaDhe9xo1elwC9fAVjy02BPiJrZ9PW.jpg")
                 .build();
 
         Coupon coupon5 = Coupon.builder()
@@ -150,7 +149,7 @@ public class Init implements CommandLineRunner {
                 .endDate(Date.valueOf(LocalDate.now().plusWeeks(2)))
                 .amount(50)
                 .price(300)
-                .image("https://media1.giphy.com/media/qeAVCeUwLavsP6JD61/200w.webp?cid=ecf05e47pgbop2cisz8v9pjemx75gcceudiawjsgjmlrdgdj&ep=v1_gifs_search&rid=200w.webp&ct=g")
+                .image("https://t4.ftcdn.net/jpg/04/08/25/53/240_F_408255305_xsvVFQXZXqDuOHbbIPlWkwJP30F9O8ZC.jpg")
                 .build();
         Coupon coupon6 = Coupon.builder()
                 .company(company6)
@@ -161,7 +160,7 @@ public class Init implements CommandLineRunner {
                 .endDate(Date.valueOf(LocalDate.now().plusDays(1)))
                 .amount(10)
                 .price(1000)
-                .image("https://media3.giphy.com/media/jGFOU6WSXrSzm/200w.webp?cid=ecf05e4719b59etgm55mu2pvz2gieopj9l4a4vezqixrn20c&ep=v1_gifs_search&rid=200w.webp&ct=g")
+                .image("https://t4.ftcdn.net/jpg/05/83/89/05/240_F_583890527_IOqfFZCl3yjpuQT96GLGB0YlFOMbjKE5.jpg")
                 .build();
         Coupon coupon7 = Coupon.builder()
                 .company(company10)
@@ -172,7 +171,7 @@ public class Init implements CommandLineRunner {
                 .endDate(Date.valueOf(LocalDate.now().plusWeeks(3)))
                 .amount(100)
                 .price(20)
-                .image("https://media1.giphy.com/media/10uVasOeFs6U92/200w.webp?cid=ecf05e473wfthhfbgpe5ck90nwp4qzh4leaukzidq08d34z5&ep=v1_gifs_search&rid=200w.webp&ct=g")
+                .image("https://m.media-amazon.com/images/I/81iHe10YLXL.jpg")
                 .build();
 
         Customer customer1 = Customer.builder()
@@ -262,11 +261,8 @@ public class Init implements CommandLineRunner {
                 company7, company8, company9, company10);
         List<Customer> customers = List.of(customer1, customer2, customer3, customer4, customer5,
                 customer6, customer7, customer8, customer9, customer10);
-        System.out.println("22222222222222222222222222222222222222222222222222");
         companyRepository.saveAll(companies);
-        System.out.println("333333333333333333333333333333333333333333333333333333333");
         customerRepository.saveAll(customers);
-        System.out.println("444444444444444444444444444444444444444444444444444444444444444444444");
         System.out.println(Art.COMPANIES);
         companyRepository.findAll().forEach(System.out::println);
         System.out.println(Art.COUPONS);

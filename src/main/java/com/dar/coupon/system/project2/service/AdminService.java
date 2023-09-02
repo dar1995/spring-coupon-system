@@ -7,9 +7,9 @@ import com.dar.coupon.system.project2.exceptions.CouponSystemExceptions;
 import java.util.List;
 
 public interface AdminService {
-    void addCompany(Company company) throws CouponSystemExceptions;
+    Company addCompany(Company company) throws CouponSystemExceptions;
 
-    void updateCompany(int companyID, Company company) throws CouponSystemExceptions;
+    Company updateCompany(int companyID, Company company) throws CouponSystemExceptions;
 
     void deleteCompany(int companyID) throws CouponSystemExceptions;
 
@@ -17,9 +17,9 @@ public interface AdminService {
 
     Company getSingleCompany(int companyID) throws CouponSystemExceptions;
 
-    void addCustomer(Customer customer) throws CouponSystemExceptions;
+    Customer addCustomer(Customer customer) throws CouponSystemExceptions;
 
-    void updateCustomer(int customerID, Customer customer) throws CouponSystemExceptions;
+    Customer updateCustomer(int customerID, Customer customer) throws CouponSystemExceptions;
 
     void deleteCustomer(int customerID) throws CouponSystemExceptions;
 

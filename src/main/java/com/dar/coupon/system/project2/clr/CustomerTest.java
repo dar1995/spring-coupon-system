@@ -14,9 +14,9 @@ import org.springframework.stereotype.Component;
 @Order(4)
 public class CustomerTest implements CommandLineRunner {
     @Autowired
-    CustomerService customerService;
+    private CustomerService customerService;
     @Autowired
-    CouponRepository couponRepository;
+    private CouponRepository couponRepository;
 
     @Override
     public void run(String... args) throws Exception {

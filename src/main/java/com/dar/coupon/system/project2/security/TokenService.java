@@ -10,5 +10,6 @@ public interface TokenService {
     UUID addToken(User user);
 
     boolean isUserAllowed(UUID token, ClientType clientType) throws CouponSystemExceptions;
+    int idFromUuid(UUID token);
 
 }

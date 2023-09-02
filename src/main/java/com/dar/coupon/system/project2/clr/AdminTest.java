@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Order(2)
 public class AdminTest implements CommandLineRunner {
     @Autowired
-    AdminService adminService;
+    private AdminService adminService;
 
 
     @Override

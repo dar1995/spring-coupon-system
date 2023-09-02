@@ -5,6 +5,7 @@ import com.dar.coupon.system.project2.beans.Coupon;
 import com.dar.coupon.system.project2.beans.Customer;
 import com.dar.coupon.system.project2.exceptions.CouponSystemExceptions;
 import com.dar.coupon.system.project2.exceptions.ErrMsg;
+import com.dar.coupon.system.project2.models.NameAndId;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -14,7 +15,7 @@ import java.util.List;
 @Service
 public class CustomerServiceImpl extends ClientService implements CustomerService {
     @Override
-    public void purchaseCoupon(int customerId, int couponID) throws CouponSystemExceptions {
+    public Coupon purchaseCoupon(int customerId, int couponID) throws CouponSystemExceptions {
         Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new CouponSystemExceptions(ErrMsg.CUSTOMER_NOT_EXIST));
         Coupon couponUpdate = couponRepository.findById(couponID).orElseThrow(() -> new CouponSystemExceptions(ErrMsg.COUPON_NOT_EXIST));
         if (couponRepository.isPurchased(customerId, couponID)) {
@@ -31,6 +32,8 @@ public class CustomerServiceImpl extends ClientService implements CustomerServic
         couponRepository.saveAndFlush(couponUpdate);
         customer.purchaseCoupon(couponUpdate);
         customerRepository.saveAndFlush(customer);
+        System.out.println(couponRepository.findById(couponID));
+        return couponRepository.findById(couponID).orElseThrow(()-> new CouponSystemExceptions(ErrMsg.COUPON_NOT_EXIST));
     }
 
     @Override
@@ -84,7 +87,7 @@ public class CustomerServiceImpl extends ClientService implements CustomerServic
             throw new CouponSystemExceptions(ErrMsg.CUSTOMER_ADD_INVALID_ID);
         }
         if (customerRepository.existsByEmail(customer.getEmail())) {
-            throw new CouponSystemExceptions(ErrMsg.CUSTOMER_ADD_EMAIL_EXIST);
+            throw new CouponSystemExceptions(ErrMsg.REGISTER_EMAIL_EXIST);
         }
         if (firstName == null || firstName.isBlank() || lastName == null || lastName.isBlank() ||
                 email == null || email.isBlank() || password == null || password.isBlank()) {
@@ -94,8 +97,7 @@ public class CustomerServiceImpl extends ClientService implements CustomerServic
     }
 
     @Override
-    public int login(String email, String password) {
-
-        return customerRepository.findIdByEmailAndPassword(email, password);
+    public NameAndId login(String email, String password) {
+        return nameAndIdRepository.findCustomerNameAndIdByEmailAndPassword(email, password);
     }
 }

@@ -27,10 +27,16 @@ public interface CouponRepository extends JpaRepository<Coupon, Integer> {
     List<Coupon> findByCompany(Company company);
 
     Coupon findByIdAndCompany(int couponId, Company company);
+    Coupon findByTitleAndCompany(String title, Company company);
 
     List<Coupon> findByCompanyAndCategory(Company company, Category category);
 
     List<Coupon> findByCompanyAndPriceLessThan(Company company, double price);
+    List<Coupon> findByCategory(Category category);
+    List<Coupon> findByPriceLessThan(double price);
+    List<Coupon> findByCategoryAndPriceLessThan(Category category, double price);
+
+
 
     @Query(value = "select case when exists(select 1 from coupon_system.customers_coupons where customer_id = ? and coupons_id = ?)\n" +
             " then 'true' else 'false' end as is_exists", nativeQuery = true)
@@ -71,6 +77,9 @@ public interface CouponRepository extends JpaRepository<Coupon, Integer> {
     @Query(value = "delete  from coupon_system.coupons\n" +
             "where coupons.end_date < curdate() and coupons.id <> 0", nativeQuery = true)
     void deleteExpiredCoupons();
+
+    @Query(value = "SELECT * FROM coupon_system.coupons order by rand() limit 3;", nativeQuery = true)
+    List<Coupon> getRandCoupons();
 
 
 }
